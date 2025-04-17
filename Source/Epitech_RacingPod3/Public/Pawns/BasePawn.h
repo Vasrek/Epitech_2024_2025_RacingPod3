@@ -6,6 +6,7 @@
 // last include
 #include "BasePawn.generated.h"
 
+class AProjectile;
 class UBoxComponent;
 
 UCLASS()
@@ -47,6 +48,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere, Category = "Combat properties")
+	TSubclassOf<AProjectile> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Combat properties")
+	FVector ProjectileScale = FVector(2.0f, 2.0f, 2.0f);
 
 
 };
