@@ -30,7 +30,7 @@ protected:
 
 	void RotateTurret(FVector LookAtTarget);
 
-	UPROPERTY(VisibleAnywhere, Category = "Canon properties")
+	UPROPERTY(EditAnywhere, Category = "Canon properties")
 	float InterpSpeed = 5.f;
 
 	void Fire();
