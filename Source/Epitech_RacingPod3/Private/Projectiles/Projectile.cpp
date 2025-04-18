@@ -1,6 +1,8 @@
 #include "Projectiles/Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+#include "Sound/SoundCue.h"
 
 AProjectile::AProjectile()
 {
@@ -36,6 +38,24 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, DamageTypeClass);
+
+		if (ExplosionSFX)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				ExplosionSFX,
+				GetActorLocation());
+		}
+		
+		if (ExplosionVFX)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				this,
+				ExplosionVFX,
+				GetActorLocation(),
+				GetActorRotation());
+		}
+		
 		Destroy();
 	}
 }

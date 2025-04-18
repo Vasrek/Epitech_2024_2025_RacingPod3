@@ -1,7 +1,10 @@
 #include "Pawns/BasePawn.h"
+
+#include "NiagaraFunctionLibrary.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectiles/Projectile.h"
+#include "Sound/SoundCue.h"
 
 ABasePawn::ABasePawn()
 {
@@ -62,7 +65,22 @@ void ABasePawn::Fire()
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
 		Projectile->SetOwner(this);
-	}
 
-	
+		if (FireSFX)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				FireSFX,
+				GetActorLocation());
+		}
+
+		if (FireVFX)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				this,
+				FireVFX,
+				ProjectileSpawnPointLocation,
+				ProjectileSpawnPointRotation);
+		}
+	}	
 }

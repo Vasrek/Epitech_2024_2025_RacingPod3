@@ -5,6 +5,8 @@
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
+class UNiagaraSystem;
+class USoundCue;
 
 UCLASS()
 class EPITECH_RACINGPOD3_API AProjectile : public AActor
@@ -30,4 +32,10 @@ private:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
+	UPROPERTY(EditAnywhere, Category = "Damage")
+	UNiagaraSystem* ExplosionVFX;
+
+	UPROPERTY(EditAnywhere, Category = "Damage")
+	USoundCue* ExplosionSFX;
+	
 };

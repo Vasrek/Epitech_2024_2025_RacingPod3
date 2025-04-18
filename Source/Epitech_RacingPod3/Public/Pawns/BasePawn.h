@@ -6,8 +6,10 @@
 // last include
 #include "BasePawn.generated.h"
 
+class UNiagaraSystem;
 class AProjectile;
 class UBoxComponent;
+class USoundCue;
 
 UCLASS()
 class EPITECH_RACINGPOD3_API ABasePawn : public APawn
@@ -55,5 +57,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat properties")
 	FVector ProjectileScale = FVector(2.0f, 2.0f, 2.0f);
 
+	UPROPERTY(EditAnywhere, Category = "Combat properties")
+	USoundCue* FireSFX;
+
+	UPROPERTY(EditAnywhere, Category = "Combat properties")
+	UNiagaraSystem* FireVFX;
 
 };
